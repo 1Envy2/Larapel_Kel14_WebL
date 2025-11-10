@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_terverifikasi_pada')->nullable();
             $table->string('sandi');
+            $table->string('nomor_telepon')->nullable(); 
+            $table->text('alamat')->nullable();
             $table->enum('peran', ['admin', 'donatur'])->default('donatur');
             $table->timestamps();
         });
