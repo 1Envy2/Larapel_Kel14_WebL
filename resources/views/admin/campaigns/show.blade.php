@@ -3,70 +3,69 @@
 @section('page-title', $campaign->title)
 
 @section('content')
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-4xl px-4 py-8 mx-auto sm:px-6 lg:px-8">
     <!-- Back Button -->
-    <a href="{{ route('admin.campaigns') }}" class="inline-flex items-center text-cyan-500 hover:text-cyan-700 mb-6">
+    <a href="{{ route('admin.campaigns') }}" class="inline-flex items-center mb-6 text-cyan-500 hover:text-cyan-700">
         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
         Kembali ke Kampanye
     </a>
 
     <!-- Campaign Banner Image with Edit Button -->
-    <div class="relative h-96 rounded-2xl overflow-hidden shadow-lg mb-8 group">
+    <div class="relative mb-8 overflow-hidden shadow-lg h-96 rounded-2xl group">
         @if($campaign->image)
-            <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-full object-cover">
+            <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="object-cover w-full h-full">
         @else
-            <div class="w-full h-full bg-gradient-to-r from-slate-100 to-slate-200 flex items-center justify-center text-slate-400">
+            <div class="flex items-center justify-center w-full h-full bg-gradient-to-r from-slate-100 to-slate-200 text-slate-400">
                 Gambar Kampanye
             </div>
         @endif
 
         <!-- Edit Button for Banner -->
-        <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="absolute top-4 right-4 bg-white rounded-full p-3 shadow-lg hover:bg-cyan-50 transition opacity-0 group-hover:opacity-100">
+        <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="absolute p-3 transition bg-white rounded-full shadow-lg opacity-0 top-4 right-4 hover:bg-cyan-50 group-hover:opacity-100">
             <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
             </svg>
         </a>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <!-- Main Content -->
         <div class="lg:col-span-2">
             <!-- Title and Organizer -->
             <h1 class="text-4xl font-extrabold text-slate-900">{{ $campaign->title }}</h1>
-            <div class="mt-3 flex items-center justify-between">
-                <div class="text-slate-600">{{ $campaign->organizer->name }}</div>
-                <span class="inline-block bg-cyan-100 text-cyan-700 px-4 py-1 rounded-full text-sm font-medium">{{ $campaign->category->name === 'Bencana Alam' ? 'Bencana' : $campaign->category->name }}</span>
+            <div class="flex items-center justify-between mt-3">
+                <span class="inline-block px-4 py-1 text-sm font-medium rounded-full bg-cyan-100 text-cyan-700">{{ $campaign->category->name === 'Bencana Alam' ? 'Bencana' : $campaign->category->name }}</span>
             </div>
 
             <!-- Stats -->
-            <div class="mt-8 grid grid-cols-3 gap-4">
-                <div class="bg-slate-50 rounded-lg p-4 text-center">
+            <div class="grid grid-cols-3 gap-4 mt-8">
+                <div class="p-4 text-center rounded-lg bg-slate-50">
                     <div class="text-2xl font-bold text-slate-900">{{ $progress_percentage }}%</div>
-                    <div class="text-sm text-slate-500 mt-1">Terpenuhi</div>
+                    <div class="mt-1 text-sm text-slate-500">Terpenuhi</div>
                 </div>
-                <div class="bg-slate-50 rounded-lg p-4 text-center">
+                <div class="p-4 text-center rounded-lg bg-slate-50">
                     <div class="text-2xl font-bold text-slate-900">{{ $totalDonations }}</div>
-                    <div class="text-sm text-slate-500 mt-1">Donatur</div>
+                    <div class="mt-1 text-sm text-slate-500">Donatur</div>
                 </div>
                 @if($progress_percentage < 100)
-                <div class="bg-slate-50 rounded-lg p-4 text-center">
+                <div class="p-4 text-center rounded-lg bg-slate-50">
                     <div class="text-2xl font-bold text-slate-900">{{ $days_remaining ?? '-' }}</div>
-                    <div class="text-sm text-slate-500 mt-1">Hari Lagi</div>
+                    <div class="mt-1 text-sm text-slate-500">Hari Lagi</div>
                 </div>
                 @else
-                <div class="bg-green-50 rounded-lg p-4 text-center">
+                <div class="p-4 text-center rounded-lg bg-green-50">
                     <div class="text-2xl font-bold text-green-600">Selesai</div>
-                    <div class="text-sm text-green-600 mt-1">Kampanye Berakhir</div>
+                    <div class="mt-1 text-sm text-green-600">Kampanye Berakhir</div>
                 </div>
                 @endif
             </div>
 
             <!-- Progress Bar -->
             <div class="mt-8">
-                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                    <div class="h-3 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-500" style="width: {{ $progress_percentage }}%"></div>
+                <div class="w-full h-3 overflow-hidden rounded-full bg-slate-100">
+                    <div class="h-3 transition-all duration-500 bg-gradient-to-r from-cyan-400 to-blue-500" style="width: {{ $progress_percentage }}%"></div>
                 </div>
-                <div class="mt-3 flex justify-between text-sm">
+                <div class="flex justify-between mt-3 text-sm">
                     <div class="font-semibold text-slate-900">
                         Rp {{ number_format((float)$campaign->collected_amount, 0, ',', '.') }}
                     </div>
@@ -80,16 +79,16 @@
             <div class="mt-10 group">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-bold text-slate-900">Cerita Kampanye</h2>
-                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="opacity-0 group-hover:opacity-100 transition text-cyan-600 hover:text-cyan-700">
+                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="transition opacity-0 group-hover:opacity-100 text-cyan-600 hover:text-cyan-700">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </a>
                 </div>
-                <div class="prose prose-sm max-w-none">
-                    <p class="text-slate-700 leading-relaxed">{{ $campaign->description }}</p>
+                <div class="prose-sm prose max-w-none">
+                    <p class="leading-relaxed text-slate-700">{{ $campaign->description }}</p>
                     @if($campaign->story)
-                        <p class="text-slate-700 leading-relaxed mt-4">{{ $campaign->story }}</p>
+                        <p class="mt-4 leading-relaxed text-slate-700">{{ $campaign->story }}</p>
                     @endif
                 </div>
             </div>
@@ -103,33 +102,33 @@
                         </svg>
                         <h2 class="text-2xl font-bold text-slate-900">Update & Berita</h2>
                     </div>
-                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="opacity-0 group-hover:opacity-100 transition text-cyan-600 hover:text-cyan-700 text-sm font-medium">
+                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="text-sm font-medium transition opacity-0 group-hover:opacity-100 text-cyan-600 hover:text-cyan-700">
                         + Tambah Update
                     </a>
                 </div>
 
                 <div class="space-y-4">
                     @forelse($campaign->updates as $update)
-                        <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="p-4 rounded-lg bg-slate-50">
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <div class="font-semibold text-slate-900">{{ $update->title }}</div>
-                                    <div class="text-sm text-slate-500 mt-1">{{ $update->created_at->format('d M Y H:i') }}</div>
+                                    <div class="mt-1 text-sm text-slate-500">{{ $update->created_at->format('d M Y H:i') }}</div>
                                 </div>
                                 <form method="POST" action="{{ route('admin.campaigns.updates.destroy', [$campaign, $update]) }}" style="display:inline;" onsubmit="return confirm('Hapus update ini?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 text-sm">
+                                    <button type="submit" class="text-sm text-red-500 hover:text-red-700">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                         </svg>
                                     </button>
                                 </form>
                             </div>
-                            <p class="text-slate-700 mt-3">{{ $update->content }}</p>
+                            <p class="mt-3 text-slate-700">{{ $update->content }}</p>
                         </div>
                     @empty
-                        <div class="bg-slate-50 rounded-lg p-6 text-center">
+                        <div class="p-6 text-center rounded-lg bg-slate-50">
                             <p class="text-slate-600">Belum ada update untuk kampanye ini.</p>
                         </div>
                     @endforelse
@@ -145,7 +144,7 @@
                         </svg>
                         <h2 class="text-2xl font-bold text-slate-900">Alokasi Dana & Transparansi</h2>
                     </div>
-                    <a href="{{ route('admin.allocations.create', $campaign) }}" class="opacity-0 group-hover:opacity-100 transition bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
+                    <a href="{{ route('admin.allocations.create', $campaign) }}" class="px-4 py-2 text-sm font-medium text-white transition rounded-lg opacity-0 group-hover:opacity-100 bg-cyan-600 hover:bg-cyan-700">
                         + Catat Alokasi
                     </a>
                 </div>
@@ -153,22 +152,22 @@
                 @if($campaign->allocations->count() > 0)
                     <div class="space-y-4">
                         @foreach($campaign->allocations as $allocation)
-                            <div class="bg-slate-50 rounded-lg p-4">
+                            <div class="p-4 rounded-lg bg-slate-50">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <div class="font-semibold text-slate-900">{{ $allocation->description }}</div>
-                                        <div class="text-sm text-slate-500 mt-1">
+                                        <div class="mt-1 text-sm text-slate-500">
                                             Oleh: {{ $allocation->admin->name }} • {{ $allocation->allocation_date->format('d M Y') }}
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <div class="text-lg font-bold text-cyan-600">{{ $allocation->formatted_amount }}</div>
-                                        <div class="text-xs text-slate-500 mt-1">{{ number_format($allocation->percentage_of_target, 1) }}% dari target</div>
+                                        <div class="mt-1 text-xs text-slate-500">{{ number_format($allocation->percentage_of_target, 1) }}% dari target</div>
                                     </div>
                                 </div>
                                 @if($allocation->proof_image)
                                     <div class="mt-3">
-                                        <a href="{{ route('admin.allocations.show', $allocation) }}" class="inline-block text-cyan-600 hover:text-cyan-700 text-sm font-semibold">
+                                        <a href="{{ route('admin.allocations.show', $allocation) }}" class="inline-block text-sm font-semibold text-cyan-600 hover:text-cyan-700">
                                             📸 Lihat Bukti
                                         </a>
                                     </div>
@@ -178,7 +177,7 @@
                     </div>
 
                     <!-- Allocation Summary -->
-                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="p-4 mt-6 border border-blue-200 rounded-lg bg-blue-50">
                         <div class="grid grid-cols-3 gap-4">
                             <div>
                                 <p class="text-sm text-slate-600">Total Dialokasikan</p>
@@ -201,9 +200,9 @@
                         </div>
                     </div>
                 @else
-                    <div class="bg-slate-50 rounded-lg p-6 text-center">
-                        <p class="text-slate-600 mb-4">Belum ada alokasi dana yang dicatat untuk kampanye ini.</p>
-                        <a href="{{ route('admin.allocations.create', $campaign) }}" class="inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-4 py-2 rounded-lg transition">
+                    <div class="p-6 text-center rounded-lg bg-slate-50">
+                        <p class="mb-4 text-slate-600">Belum ada alokasi dana yang dicatat untuk kampanye ini.</p>
+                        <a href="{{ route('admin.allocations.create', $campaign) }}" class="inline-block px-4 py-2 font-semibold text-white transition rounded-lg bg-cyan-600 hover:bg-cyan-700">
                             Catat Alokasi Dana Pertama
                         </a>
                     </div>
@@ -220,7 +219,7 @@
                 </div>
                 <div class="space-y-4">
                     @forelse($successfulDonations as $donation)
-                        <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="p-4 rounded-lg bg-slate-50">
                             <div class="flex items-start justify-between">
                                 <div>
                                     <div class="font-semibold text-slate-900">
@@ -234,16 +233,16 @@
                                             Donatur Anonim
                                         @endif
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-1">{{ $donation->created_at->format('d M Y H:i') }}</div>
+                                    <div class="mt-1 text-sm text-slate-500">{{ $donation->created_at->format('d M Y H:i') }}</div>
                                 </div>
                                 <div class="text-sm font-semibold text-cyan-600">
                                     Rp {{ number_format($donation->amount, 0, ',', '.') }}
                                 </div>
                             </div>
                             @if($donation->message)
-                                <p class="text-slate-700 mt-3">{{ $donation->message }}</p>
+                                <p class="mt-3 text-slate-700">{{ $donation->message }}</p>
                             @else
-                                <p class="text-slate-500 italic mt-3">Tidak ada pesan</p>
+                                <p class="mt-3 italic text-slate-500">Tidak ada pesan</p>
                             @endif
                         </div>
                     @empty
@@ -252,16 +251,16 @@
 
                     <!-- Display comments from campaign_comments table -->
                     @forelse($campaign->comments as $comment)
-                        <div class="bg-slate-50 rounded-lg p-4">
+                        <div class="p-4 rounded-lg bg-slate-50">
                             <div class="flex items-start justify-between">
                                 <div>
                                     <div class="font-semibold text-slate-900">
                                         {{ $comment->user->name }}
                                     </div>
-                                    <div class="text-sm text-slate-500 mt-1">{{ $comment->created_at->format('d M Y H:i') }}</div>
+                                    <div class="mt-1 text-sm text-slate-500">{{ $comment->created_at->format('d M Y H:i') }}</div>
                                 </div>
                                 <div class="text-xs font-semibold text-slate-400">
-                                    <div class="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                                    <div class="flex items-center gap-1 text-xs font-semibold text-slate-400">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
                                         </svg>
@@ -269,13 +268,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-slate-700 mt-3">{{ $comment->message }}</p>
+                            <p class="mt-3 text-slate-700">{{ $comment->message }}</p>
                         </div>
                     @empty
                     @endforelse
 
                     @if($successfulDonations->isEmpty() && $campaign->comments->isEmpty())
-                        <p class="text-slate-500 text-center py-8">Belum ada donasi atau komentar dari donatur</p>
+                        <p class="py-8 text-center text-slate-500">Belum ada donasi atau komentar dari donatur</p>
                     @endif
                 </div>
             </div>
@@ -283,27 +282,26 @@
 
         <!-- Sidebar: Admin Actions -->
         <div class="lg:col-span-1">
-            <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-20">
-                <h3 class="text-lg font-bold text-slate-900 mb-4">Aksi Admin</h3>
+            <div class="sticky p-6 bg-white shadow-lg rounded-2xl top-20">
+                <h3 class="mb-4 text-lg font-bold text-slate-900">Aksi Admin</h3>
 
                 <div class="space-y-3">
-                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="block w-full text-center bg-cyan-500 text-white font-bold py-3 rounded-lg hover:bg-cyan-600 transition">
+                    <a href="{{ route('admin.campaigns.edit', $campaign) }}" class="block w-full py-3 font-bold text-center text-white transition rounded-lg bg-cyan-500 hover:bg-cyan-600">
                         Edit Kampanye
                     </a>
                     <form method="POST" action="{{ route('admin.campaigns.destroy', $campaign) }}" onsubmit="return confirm('Hapus kampanye ini?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="w-full text-center bg-red-500 text-white font-bold py-3 rounded-lg hover:bg-red-600 transition">
+                        <button type="submit" class="w-full py-3 font-bold text-center text-white transition bg-red-500 rounded-lg hover:bg-red-600">
                             Hapus Kampanye
                         </button>
                     </form>
                 </div>
 
-                <div class="mt-6 bg-slate-50 rounded-lg p-4">
-                    <div class="text-xs text-slate-500 uppercase font-semibold">Tentang Kampanye</div>
+                <div class="p-4 mt-6 rounded-lg bg-slate-50">
+                    <div class="text-xs font-semibold uppercase text-slate-500">Tentang Kampanye</div>
                     <div class="mt-3 space-y-2 text-sm text-slate-600">
                         <div><strong>Kategori:</strong> {{ $campaign->category->name === 'Bencana Alam' ? 'Bencana' : $campaign->category->name }}</div>
-                        <div><strong>Penyelenggara:</strong> {{ $campaign->organizer->name }}</div>
                         <div><strong>Status:</strong> {{ ucfirst($campaign->status) }}</div>
                         <div><strong>Dibuat:</strong> {{ $campaign->created_at->format('d M Y') }}</div>
                     </div>
