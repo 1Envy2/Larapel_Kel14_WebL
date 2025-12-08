@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('target_amount', 15, 2);
             $table->decimal('collected_amount', 15, 2)->default(0);
             $table->string('image')->nullable();
-            $table->bigInteger('organizer_id');
             $table->bigInteger('category_id');
             $table->enum('status', ['active', 'completed', 'cancelled'])->default('active');
             $table->text('story')->nullable();
