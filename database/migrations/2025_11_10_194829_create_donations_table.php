@@ -21,6 +21,10 @@ return new class extends Migration
             $table->enum('status', ['pending', 'successful', 'failed'])->default('pending');
             $table->string('proof_image')->nullable();
             $table->text('message')->nullable();
+            $table->string('donor_name')->nullable();
+            $table->string('donor_email')->nullable();
+            $table->boolean('anonymous')->default(false);
+            $table->string('status_locked')->nullable();
             $table->timestamps();
         });
     }
