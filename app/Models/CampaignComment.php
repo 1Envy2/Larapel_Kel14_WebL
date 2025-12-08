@@ -13,17 +13,11 @@ class CampaignComment extends Model
         'message',
     ];
 
-    /**
-     * Get the campaign this comment belongs to
-     */
     public function campaign(): BelongsTo
     {
         return $this->belongsTo(Campaign::class);
     }
 
-    /**
-     * Get the user who posted the comment
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
