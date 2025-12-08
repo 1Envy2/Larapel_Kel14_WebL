@@ -13,9 +13,6 @@ class CampaignUpdate extends Model
         'content',
     ];
 
-    /**
-     * Get the campaign this update belongs to
-     */
     public function campaign(): BelongsTo
     {
         return $this->belongsTo(Campaign::class);
