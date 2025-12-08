@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 class CampaignUpdateController extends Controller
 {
-    /**
-     * Store a new campaign update
-     */
+
     public function store(Request $request, Campaign $campaign)
     {
         $validated = $request->validate([
@@ -23,9 +21,7 @@ class CampaignUpdateController extends Controller
         return redirect()->route('admin.campaigns.edit', $campaign)->with('success', 'Update berhasil ditambahkan');
     }
 
-    /**
-     * Delete a campaign update
-     */
+
     public function destroy(Campaign $campaign, CampaignUpdate $update)
     {
         // Make sure the update belongs to this campaign
