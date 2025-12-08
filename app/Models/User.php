@@ -25,12 +25,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
+        'role',
         'avatar',
         'phone',
         'address',
         'google_id',
         'google_token',
+        'otp_code', 
+        'otp_expires_at',
     ];
 
     /**
@@ -53,15 +55,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'otp_expires_at' => 'datetime',
         ];
-    }
-
-    /**
-     * Get the role that owns the user
-     */
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -78,14 +73,6 @@ class User extends Authenticatable
     public function campaigns(): HasMany
     {
         return $this->hasMany(Campaign::class, 'organizer_id');
-    }
-
-    /**
-     * Get the notifications for the user
-     */
-    public function notifications(): HasMany
-    {
-        return $this->hasMany(Notification::class);
     }
 
     /**
@@ -157,7 +144,7 @@ class User extends Authenticatable
      */
     public function isAdmin(): bool
     {
-        return $this->role?->name === 'Admin';
+        return $this->role === 'admin';
     }
 
     /**
@@ -165,7 +152,7 @@ class User extends Authenticatable
      */
     public function isDonor(): bool
     {
-        return $this->role?->name === 'Donor';
+        return $this->role === 'donor';
     }
 
     /**
