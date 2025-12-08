@@ -15,7 +15,6 @@ class Campaign extends Model
         'target_amount',
         'collected_amount',
         'image',
-        'organizer_id',
         'category_id',
         'status',
         'story',
@@ -28,14 +27,6 @@ class Campaign extends Model
         'collected_amount' => 'decimal:2',
         'end_date' => 'date',
     ];
-
-    /**
-     * Get the organizer of the campaign
-     */
-    public function organizer(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'organizer_id');
-    }
 
     /**
      * Get the category of the campaign
