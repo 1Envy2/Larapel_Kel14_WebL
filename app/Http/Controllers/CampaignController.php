@@ -17,7 +17,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        $query = Campaign::with('organizer', 'category');
+        $query = Campaign::with('category');
 
         // If sort is 'selesai', show only completed campaigns
         // Otherwise show only active campaigns
@@ -95,7 +95,6 @@ class CampaignController extends Controller
             $validated['image'] = $request->file('image')->store('campaigns', 'public');
         }
 
-        $validated['organizer_id'] = auth()->id();
         $validated['status'] = 'active';
         $validated['collected_amount'] = 0;
 
@@ -109,7 +108,7 @@ class CampaignController extends Controller
      */
     public function show(Campaign $campaign)
     {
-        $campaign->load('organizer', 'category', 'donations.donor', 'comments.user');
+        $campaign->load('category', 'donations.donor', 'comments.user');
         $totalDonations = $campaign->donations->where('status', 'successful')->where('amount', '>', 0)->count();
         // Get only successful donations with amount > 0 (exclude comment entries)
         $successfulDonations = $campaign->donations->where('status', 'successful')->where('amount', '>', 0)->values();
@@ -188,30 +187,6 @@ class CampaignController extends Controller
         $campaign->delete();
 
         return redirect()->route('campaigns.index')->with('success', 'Kampanye berhasil dihapus');
-    }
-
-    // Save campaign for donor
-    public function save(Campaign $campaign)
-    {
-        $user = auth()->user();
-        if (!$user->isDonor()) {
-            abort(403, 'Unauthorized');
-        }
-        
-        // Check if campaign is already saved
-        $savedCampaign = $user->savedCampaignsList()
-            ->where('campaign_id', $campaign->id)
-            ->first();
-        
-        if ($savedCampaign) {
-            // Unsave the campaign
-            $savedCampaign->delete();
-            return back()->with('success', 'Kampanye dihapus dari tersimpan');
-        } else {
-            // Save the campaign
-            $user->savedCampaignsList()->create(['campaign_id' => $campaign->id]);
-            return back()->with('success', 'Kampanye disimpan');
-        }
     }
 
     // Comment on campaign for donor
