@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('otp_code', 6)->nullable(); 
+            $table->timestamp('otp_expires_at')->nullable();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
+            $table->string('avatar')->nullable();
+            $table->enum('role', ['admin', 'donor'])->default('donor');
             $table->rememberToken();
             $table->timestamps();
         });
