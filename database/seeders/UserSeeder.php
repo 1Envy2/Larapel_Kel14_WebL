@@ -15,16 +15,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get roles
-        $adminRole = Role::where('name', 'Admin')->first();
-        $donorRole = Role::where('name', 'Donor')->first();
 
         // Create admin user
         User::create([
             'name' => 'Admin HopeFund',
             'email' => 'admin@hopefund.com',
             'password' => Hash::make('password123'),
-            'role_id' => $adminRole->id,
+            'role' => 'admin',
             'email_verified_at' => now(),
             'phone' => '08123456789',
             'address' => 'Jakarta, Indonesia',
@@ -35,7 +32,7 @@ class UserSeeder extends Seeder
             'name' => 'Budi Santoso',
             'email' => 'budi@example.com',
             'password' => Hash::make('password123'),
-            'role_id' => $donorRole->id,
+            'role' => 'donor',
             'email_verified_at' => now(),
             'phone' => '08987654321',
             'address' => 'Jakarta, Indonesia',
@@ -45,7 +42,7 @@ class UserSeeder extends Seeder
             'name' => 'Siti Aminah',
             'email' => 'siti@example.com',
             'password' => Hash::make('password123'),
-            'role_id' => $donorRole->id,
+            'role' => 'donor',
             'email_verified_at' => now(),
             'phone' => '08111222333',
             'address' => 'Surabaya, Indonesia',
@@ -53,7 +50,7 @@ class UserSeeder extends Seeder
 
         // Create additional donor users
         User::factory(5)->create([
-            'role_id' => $donorRole->id,
+            'role' => 'donor',
         ]);
     }
 }
