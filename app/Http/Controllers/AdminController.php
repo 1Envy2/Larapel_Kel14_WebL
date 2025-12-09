@@ -22,7 +22,7 @@ class AdminController extends Controller
             'total_donations' => Donation::where('status', 'successful')->count(),
             'active_campaigns' => Campaign::where('status', 'active')->count(),
             'total_raised' => Donation::where('status', 'successful')->sum('amount'),
-            'total_donors' => User::where('role_id', 2)->count(),
+            'total_donors' => User::where('role', 'admin')->count(),
             'pending_donations' => Donation::where('status', 'pending')->count(),
         ];
 
@@ -160,10 +160,7 @@ class AdminController extends Controller
      */
     public function campaigns(Request $request)
     {
-        $query = Campaign::with('organizer', 'category')
-            ->withCount(['donations' => function ($q) {
-                $q->where('status', 'successful')->where('amount', '>', 0);
-            }]);
+        $query = Campaign::with('category');
 
         // Search by title or description
         if ($request->filled('search')) {
@@ -284,32 +281,13 @@ class AdminController extends Controller
      */
     public function showCampaign(Campaign $campaign)
     {
-        $campaign->load('organizer', 'category', 'comments.user');
-        
-        // Use database queries instead of loading all donations in memory
-        $totalDonations = Donation::where('campaign_id', $campaign->id)
-            ->where('status', 'successful')
-            ->where('amount', '>', 0)
-            ->count();
-        
-        $successfulDonations = Donation::where('campaign_id', $campaign->id)
-            ->where('status', 'successful')
-            ->where('amount', '>', 0)
-            ->with('donor')
-            ->latest()
-            ->get();
-        
+        $campaign->load('category', 'donations.donor', 'comments.user');
+        $totalDonations = $campaign->donations->where('status', 'successful')->where('amount', '>', 0)->count();
+        $successfulDonations = $campaign->donations->where('status', 'successful')->where('amount', '>', 0)->values();
         $progress_percentage = $campaign->target_amount > 0
             ? min(100, round(($campaign->collected_amount / $campaign->target_amount) * 100))
             : 0;
-        
-        // Calculate days remaining using the same logic as the donor view
-        if ($campaign->end_date) {
-            $daysLeft = now()->diffInDays($campaign->end_date, false);
-            $days_remaining = $daysLeft < 0 ? null : ($daysLeft === 0 && now()->lessThan($campaign->end_date) ? 1 : (int)$daysLeft);
-        } else {
-            $days_remaining = null;
-        }
+        $days_remaining = $campaign->end_date ? max(0, \Carbon\Carbon::parse($campaign->end_date)->diffInDays(now())) : null;
 
         return view('admin.campaigns.show', compact('campaign', 'totalDonations', 'successfulDonations', 'progress_percentage', 'days_remaining'));
     }

@@ -3,54 +3,59 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
-class NewPasswordController extends Controller
+class PasswordController extends Controller
 {
     /**
-     * Display the password reset view.
+     * Update the user's password.
      */
-    public function create(Request $request): View
+    public function update(Request $request): RedirectResponse
     {
-        return view('auth.reset-password', ['request' => $request]);
-    }
-
-    /**
-     * Handle an incoming new password request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'token' => ['required'],
-            'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        // Custom validation with Indonesian messages
+        $validated = $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',  // Must contain uppercase
+                'regex:/[a-z]/',  // Must contain lowercase
+                'regex:/[0-9]/',  // Must contain number
+                'confirmed'
+            ],
+            'password_confirmation' => ['required', 'string'],
+        ], [
+            'current_password.required' => 'Kata sandi saat ini wajib diisi.',
+            'password.required' => 'Kata sandi baru wajib diisi.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'password.regex' => 'Kata sandi harus mengandung huruf besar, huruf kecil, dan angka.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
         ]);
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
+        // Verify current password
+        if (!Hash::check($validated['current_password'], $request->user()->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => 'Kata sandi saat ini tidak sesuai.',
+            ])->redirectTo(back()->getTargetUrl());
+        }
 
-                event(new PasswordReset($user));
-            }
-        );
+        // Update password
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
 
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        // Logout user and redirect to login
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('status', 'password-updated-logout');
     }
 }

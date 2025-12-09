@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Display the home page.
-     */
     public function index()
     {
-        // Redirect admin to dashboard
-        if (Auth::check() && Auth::user()->isAdmin()) {
+        // If not authenticated, redirect to campaigns page
+        if (!Auth::check()) {
+            return redirect()->route('campaigns.index');
+        }
+
+        // Redirect admin to their dashboard
+        if (Auth::user() && Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
         }
 
+        // Fetch featured campaigns for authenticated donors
         $featuredCampaigns = Campaign::where('status', 'active')
-            ->with('organizer', 'category')
+            ->with('category')
             ->withCount(['donations' => function ($q) {
                 $q->where('status', 'successful')->where('amount', '>', 0);
             }])
@@ -34,7 +37,8 @@ class HomeController extends Controller
             'total_raised' => Donation::where('status', 'successful')->sum('amount'),
         ];
 
-    $totalDonors = \App\Models\User::where('role_id', 2)->count();
-    return view('home', compact('featuredCampaigns', 'stats', 'totalDonors'));
+        $totalDonors = \App\Models\User::where('role', 'donor')->count();
+        
+        return view('home', compact('featuredCampaigns', 'stats', 'totalDonors'));
     }
 }

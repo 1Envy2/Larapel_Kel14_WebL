@@ -12,6 +12,9 @@ class Category extends Model
         'description',
     ];
 
+    /**
+     * Get the campaigns in this category
+     */
     public function campaigns(): HasMany
     {
         return $this->hasMany(Campaign::class);

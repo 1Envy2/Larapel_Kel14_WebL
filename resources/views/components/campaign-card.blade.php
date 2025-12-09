@@ -6,7 +6,7 @@
     $percentage = (int) min(100, $target > 0 ? round(($collected / $target) * 100) : 0);
     $donors = $campaign->donations_count ?? 0;
     
-    // Calculate days 
+    // Calculate days left properly
     if ($campaign->end_date) {
         $daysLeft = now()->diffInDays($campaign->end_date, false);
         $daysLeft = $daysLeft < 0 ? null : ($daysLeft === 0 && now()->lessThan($campaign->end_date) ? 1 : (int)$daysLeft);
@@ -17,7 +17,7 @@
     $organizer = $campaign->organizer->name ?? 'Penyelenggara';
     $imageUrl = $campaign->image ? asset('storage/' . $campaign->image) : null;
 
-    // Indonesian currency 
+    // Indonesian currency formatting helper
     $idr = function($amount) {
         return 'Rp ' . number_format($amount, 0, ',', '.');
     };

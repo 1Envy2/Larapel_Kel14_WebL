@@ -17,6 +17,9 @@ class PaymentMethod extends Model
         'requires_proof' => 'boolean',
     ];
 
+    /**
+     * Get the donations using this payment method
+     */
     public function donations(): HasMany
     {
         return $this->hasMany(Donation::class);

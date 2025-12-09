@@ -81,7 +81,7 @@ class SocialiteController extends Controller
         ]);
 
         // Assign Donor role to new user
-        $donorRole = Role::where('name', 'Donor')->first();
+        $donorRole = Role::where('role', 'donor')->first();
         if ($donorRole) {
             $user->role_id = $donorRole->id;
             $user->save();
