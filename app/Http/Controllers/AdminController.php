@@ -162,6 +162,11 @@ class AdminController extends Controller
     {
         $query = Campaign::with('category');
 
+        // Count only successful donations for accurate donor count
+        $query->withCount(['donations' => function ($q) {
+            $q->where('status', 'successful')->where('amount', '>', 0);
+        }]);
+
         // Search by title or description
         if ($request->filled('search')) {
             $search = $request->search;
@@ -287,7 +292,14 @@ class AdminController extends Controller
         $progress_percentage = $campaign->target_amount > 0
             ? min(100, round(($campaign->collected_amount / $campaign->target_amount) * 100))
             : 0;
-        $days_remaining = $campaign->end_date ? max(0, \Carbon\Carbon::parse($campaign->end_date)->diffInDays(now())) : null;
+        
+        // Calculate days remaining - use ceiling to show at least 1 day if still valid
+        if ($campaign->end_date) {
+            $daysLeft = now()->diffInDays($campaign->end_date, false);
+            $days_remaining = $daysLeft < 0 ? null : ($daysLeft === 0 && now()->lessThan($campaign->end_date) ? 1 : (int)$daysLeft);
+        } else {
+            $days_remaining = null;
+        }
 
         return view('admin.campaigns.show', compact('campaign', 'totalDonations', 'successfulDonations', 'progress_percentage', 'days_remaining'));
     }
