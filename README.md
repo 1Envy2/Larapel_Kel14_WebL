@@ -58,11 +58,6 @@ php artisan serve
 npm run dev
 ```
 
-**Terminal 3 - Queue Worker (optional):**
-```bash
-php artisan queue:listen
-```
-
 Buka browser: **http://localhost:8000**
 
 ---
@@ -97,10 +92,8 @@ Role:     donor
 | **Status Donasi** | ✅ | Upload bukti & tracking status real-time |
 | **Riwayat Donasi** | ✅ | Lihat semua donasi yang pernah dilakukan |
 | **Lihat Alokasi Dana** | ✅ | Transparansi penuh - kemana dana digunakan |
-| **Save Kampanye** | ✅ | Bookmark kampanye favorit untuk kemudian |
 | **Comment & Updates** | ✅ | Komentar pada kampanye & terima updates |
 | **Edit Profil** | ✅ | Update nama, email, avatar, & kontak |
-| **Notifikasi** | ✅ | Notifikasi donasi & update kampanye |
 
 ### 🛡️ Untuk Admin
 | Fitur | Status | Deskripsi |
@@ -112,9 +105,7 @@ Role:     donor
 | **Posting Updates** | ✅ | Bagikan perkembangan kampanye ke donatur |
 | **Kelola Donasi** | ✅ | Verifikasi & update status donasi (pending → successful) |
 | **Kelola Alokasi** | ✅ | Record & dokumentasi penggunaan dana |
-| **Upload Proof** | ✅ | Lampirkan bukti penggunaan dana (foto) |
-| **Lihat Laporan** | ✅ | View detailed reports & activity logs |
-| **Audit Trail** | ✅ | Track semua perubahan & aktivitas sistem |
+| **Lihat Aktivitas** | ✅ | Melihat detail aktivitas donatur |
 
 ---
 
@@ -127,8 +118,7 @@ Campaign          → Kampanye galangan dana
 Donation          → Transaksi donasi
 Allocation        → Penggunaan dana (transparansi)
 Category          → Kategori kampanye
-PaymentMethod     → Metode pembayaran (Transfer, QR)
-ActivityLog       → Audit trail semua aktivitas
+PaymentMethod     → Metode pembayaran (Transfer)
 ```
 
 ### Key Relationships
@@ -240,12 +230,6 @@ id, campaign_id, admin_id, description, amount, allocation_date,
 proof_image, timestamps
 ```
 
-**activity_logs**
-```
-id, user_id, action, actionable_type, actionable_id, description, 
-old_values (JSON), new_values (JSON), timestamps
-```
-
 ---
 
 ## 🔒 Authentication & Authorization
@@ -265,7 +249,6 @@ old_values (JSON), new_values (JSON), timestamps
 ### Policies
 - **CampaignPolicy** - Admin dapat manage campaigns
 - **DonationPolicy** - Donor/Admin dapat view donation mereka
-- **NotificationPolicy** - User hanya lihat notifikasi mereka
 
 ---
 
@@ -481,29 +464,10 @@ chown -R www-data:www-data storage
 - ✅ Asset minification (Vite)
 - ✅ Lazy loading images
 
----
-
-## 🚀 Future Enhancements (Optional)
-
-- [ ] Payment gateway integration (Midtrans, Stripe)
-- [ ] Email notifications
-- [ ] Advanced reporting & export
-- [ ] Social sharing features
-- [ ] Milestone achievements
-- [ ] Donor badges & recognition
-- [ ] API for mobile app
-- [ ] Real-time notifications (WebSocket)
-
----
 
 **HopeFund** - Transparansi & Kepercayaan dalam Setiap Donasi 🤝
 
 Siap digunakan untuk operasional penuh! 🎉
-
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
