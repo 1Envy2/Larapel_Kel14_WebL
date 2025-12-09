@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\SocialUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -80,12 +79,7 @@ class SocialiteController extends Controller
             'avatar' => $googleUser->getAvatar(),
         ]);
 
-        // Assign Donor role to new user
-        $donorRole = Role::where('role', 'donor')->first();
-        if ($donorRole) {
-            $user->role_id = $donorRole->id;
-            $user->save();
-        }
+        // Assign Donor role to new user (automatically set to 'donor' by default in users table)
 
         // Create social user record
         SocialUser::create([
