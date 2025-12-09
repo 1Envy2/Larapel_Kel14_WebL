@@ -1,23 +1,21 @@
-# 🎯 HopeFund - Platform Galangan Dana Transparan
+# HopeFund - Platform Galangan Dana Transparan
 
 **Laravel 12 + PostgreSQL + TailwindCSS + Vite**
 
 Platform galangan dana modern dengan transparansi penuh. Admin mengelola kampanye, dan publik dapat berdonasi serta melacak alokasi dana secara real-time.
 
-## ✅ Status: Fully Functional (100%)
-
 Semua fitur inti telah diimplementasikan dan teruji dengan sempurna:
-- ✅ Backend & Database lengkap
-- ✅ Authentication & Authorization
-- ✅ Campaign & Donation Management
-- ✅ Transparansi & Alokasi Dana
-- ✅ Admin Dashboard & Analytics
-- ✅ Activity Logging & Audit Trail
-- ✅ Views & Frontend
+- Backend & Database lengkap
+- Authentication & Authorization
+- Campaign & Donation Management
+- Transparansi & Alokasi Dana
+- Admin Dashboard & Analytics
+- Activity Logging & Audit Trail
+- Views & Frontend
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - PHP 8.2+
@@ -62,7 +60,7 @@ Buka browser: **http://localhost:8000**
 
 ---
 
-## 🔐 Test Credentials
+## Test Credentials
 
 ### Admin Account
 ```
@@ -80,9 +78,9 @@ Role:     donor
 
 ---
 
-## 📊 Fitur Aplikasi
+## Fitur Aplikasi
 
-### 🌐 Untuk Donor & Publik
+### Untuk Donor & Publik
 | Fitur | Status | Deskripsi |
 |-------|--------|-----------|
 | **Browse Kampanye** | ✅ | Lihat semua kampanye galangan dana aktif |
@@ -95,7 +93,7 @@ Role:     donor
 | **Comment & Updates** | ✅ | Komentar pada kampanye & terima updates |
 | **Edit Profil** | ✅ | Update nama, email, avatar, & kontak |
 
-### 🛡️ Untuk Admin
+### Untuk Admin
 | Fitur | Status | Deskripsi |
 |-------|--------|-----------|
 | **Dashboard Analytics** | ✅ | Statistik donasi, kampanye, & donatur terkemuka |
@@ -109,7 +107,7 @@ Role:     donor
 
 ---
 
-## 🏗️ Arsitektur & Struktur Database
+## Arsitektur & Struktur Database
 
 ### Models (7)
 ```
@@ -151,7 +149,7 @@ PaymentMethod     → Metode pembayaran (Transfer)
 
 ---
 
-## 🎨 Frontend Components
+## Frontend Components
 
 ### Views Structure
 ```
@@ -201,7 +199,7 @@ resources/views/
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### Key Tables
 
@@ -232,7 +230,7 @@ proof_image, timestamps
 
 ---
 
-## 🔒 Authentication & Authorization
+## Authentication & Authorization
 
 ### Authentication Flow
 1. **Register/Login** → Email verification via OTP
@@ -252,35 +250,35 @@ proof_image, timestamps
 
 ---
 
-## 📈 Key Features Breakdown
+## Key Features Breakdown
 
-### 1️⃣ Transparansi Dana
+### 1️. Transparansi Dana
 - **Public Allocation Log** - Siapa saja bisa lihat `/transparansi`
 - **Proof Images** - Setiap alokasi dilengkapi bukti foto
 - **Detailed Tracking** - Tahu persis kemana dana digunakan
 - **Historical Records** - All transactions logged & auditable
 
-### 2️⃣ Campaign Management
+### 2️. Campaign Management
 - **Admin-Only Creation** - Only admins dapat buat kampanye
 - **Dynamic Status** - active → completed (auto-update bila target tercapai)
 - **Category Organization** - Organize by kategori (education, health, dll)
 - **Campaign Updates** - Admin post updates → donatur ternotifikasi
 - **Progress Tracking** - Visual progress bar & percentage
 
-### 3️⃣ Donation System
+### 3️. Donation System
 - **Multiple Payment Methods** - Transfer Bank, QR Code
 - **Proof Verification** - Upload bukti pembayaran
 - **Real-time Status** - pending → successful → notification
 - **Anonymous Donation** - Option untuk donasi anonim
 - **Donor Analytics** - Track total donated, campaigns supported, impact score
 
-### 4️⃣ Activity Logging
+### 4️. Activity Logging
 - **Full Audit Trail** - Setiap action (create, update, delete) tercatat
 - **Change Tracking** - Old vs new values disimpan
 - **Admin Accountability** - Who did what & when
 - **Searchable Logs** - Query activity history
 
-### 5️⃣ User Experience
+### 5️. User Experience
 - **Responsive Design** - Desktop, tablet, mobile
 - **Fast Performance** - Vite + optimized queries
 - **Intuitive UI** - Clear CTAs, easy navigation
@@ -288,7 +286,7 @@ proof_image, timestamps
 
 ---
 
-## 📊 Statistics & Metrics (Dashboard)
+## Statistics & Metrics (Dashboard)
 
 Admin dapat melihat:
 - Total donation amount (successful)
@@ -300,7 +298,7 @@ Admin dapat melihat:
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Production Setup
 ```bash
@@ -356,7 +354,7 @@ php artisan logs                    # View recent logs
 
 ---
 
-## 📚 Tech Stack
+## Tech Stack
 
 | Layer | Technology | Version |
 |-------|-----------|---------|
@@ -370,7 +368,7 @@ php artisan logs                    # View recent logs
 
 ---
 
-## 🔧 Configuration Files
+## Configuration Files
 
 ### Environment (.env)
 ```
@@ -393,7 +391,7 @@ MAIL_MAILER=smtp
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Database Connection Error
 ```bash
@@ -416,16 +414,16 @@ chown -R www-data:www-data storage
 
 ---
 
-## 📞 Support & Documentation
+## Contributors
 
-- **Laravel Docs**: https://laravel.com/docs/12
-- **TailwindCSS**: https://tailwindcss.com/docs
-- **PostgreSQL**: https://postgresql.org/docs
-- **Vite Docs**: https://vitejs.dev/guide/
+- [ADYATMA YUSUF FARABI]([https://github.com/alice](https://github.com/1Envy2))
+- [AATHIFAH DIHYAN CALYSTA]([https://github.com/alice](https://github.com/aathifahdc))
+- [WAHYU SRI ARYO PANGESTU]([https://github.com/alice](https://github.com/wahyuwsap))
+- [DYMAZ SATYA PUTRA]([https://github.com/alice](https://github.com/DYmazeh))
 
 ---
 
-## 📋 Project Information
+## Project Information
 
 | Aspek | Detail |
 |-------|--------|
@@ -440,7 +438,7 @@ chown -R www-data:www-data storage
 
 ---
 
-## 🎓 Architecture Highlights
+## Architecture Highlights
 
 ### Clean Code Principles
 - ✅ Models dengan proper relationships
@@ -465,9 +463,9 @@ chown -R www-data:www-data storage
 - ✅ Lazy loading images
 
 
-**HopeFund** - Transparansi & Kepercayaan dalam Setiap Donasi 🤝
+**HopeFund** - Transparansi & Kepercayaan dalam Setiap Donasi 
 
-Siap digunakan untuk operasional penuh! 🎉
+Siap digunakan untuk operasional penuh! 
 
 ## License
 
