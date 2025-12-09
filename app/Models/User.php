@@ -84,6 +84,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the new saved campaigns relationship
+     */
+    public function savedCampaignsList(): HasMany
+    {
+        return $this->hasMany(SavedCampaign::class);
+    }
+
+    /**
      * Get total amount donated by this user (successful donations only)
      */
     public function getTotalDonated(): float

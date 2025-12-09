@@ -1,61 +1,505 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎯 HopeFund - Platform Galangan Dana Transparan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Laravel 12 + PostgreSQL + TailwindCSS + Vite**
 
-## About Laravel
+Platform galangan dana modern dengan transparansi penuh. Admin mengelola kampanye, dan publik dapat berdonasi serta melacak alokasi dana secara real-time.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✅ Status: Fully Functional (100%)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Semua fitur inti telah diimplementasikan dan teruji dengan sempurna:
+- ✅ Backend & Database lengkap
+- ✅ Authentication & Authorization
+- ✅ Campaign & Donation Management
+- ✅ Transparansi & Alokasi Dana
+- ✅ Admin Dashboard & Analytics
+- ✅ Activity Logging & Audit Trail
+- ✅ Views & Frontend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Quick Start
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
+- PHP 8.2+
+- PostgreSQL
+- Node.js & npm
+- Composer
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```bash
+# 1. Clone dan setup
+cd c:\laragon\www\HopeFund
 
-## Laravel Sponsors
+# 2. Install dependencies
+composer install
+npm install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 3. Setup environment
+copy .env.example .env
+php artisan key:generate
 
-### Premium Partners
+# 4. Database setup
+php artisan migrate --seed
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# 5. Build assets
+npm run build
+```
 
-## Contributing
+### Running Development Server
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Terminal 1 - Laravel Server:**
+```bash
+php artisan serve
+```
 
-## Code of Conduct
+**Terminal 2 - Watch Assets:**
+```bash
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Terminal 3 - Queue Worker (optional):**
+```bash
+php artisan queue:listen
+```
+
+Buka browser: **http://localhost:8000**
+
+---
+
+## 🔐 Test Credentials
+
+### Admin Account
+```
+Email:    admin@hopefund.com
+Password: password123
+Role:     admin
+```
+
+### Donor Account
+```
+Email:    budi@example.com
+Password: password123
+Role:     donor
+```
+
+---
+
+## 📊 Fitur Aplikasi
+
+### 🌐 Untuk Donor & Publik
+| Fitur | Status | Deskripsi |
+|-------|--------|-----------|
+| **Browse Kampanye** | ✅ | Lihat semua kampanye galangan dana aktif |
+| **Filter & Search** | ✅ | Cari kampanye berdasarkan kategori & keywords |
+| **Lihat Detail Kampanye** | ✅ | Info lengkap, progress, & updates terbaru |
+| **Buat Donasi** | ✅ | Donasi via Transfer Bank atau QR Code |
+| **Status Donasi** | ✅ | Upload bukti & tracking status real-time |
+| **Riwayat Donasi** | ✅ | Lihat semua donasi yang pernah dilakukan |
+| **Lihat Alokasi Dana** | ✅ | Transparansi penuh - kemana dana digunakan |
+| **Save Kampanye** | ✅ | Bookmark kampanye favorit untuk kemudian |
+| **Comment & Updates** | ✅ | Komentar pada kampanye & terima updates |
+| **Edit Profil** | ✅ | Update nama, email, avatar, & kontak |
+| **Notifikasi** | ✅ | Notifikasi donasi & update kampanye |
+
+### 🛡️ Untuk Admin
+| Fitur | Status | Deskripsi |
+|-------|--------|-----------|
+| **Dashboard Analytics** | ✅ | Statistik donasi, kampanye, & donatur terkemuka |
+| **Buat Kampanye** | ✅ | Inisiasi galangan dana baru |
+| **Edit Kampanye** | ✅ | Update detail, target, & status kampanye |
+| **Hapus Kampanye** | ✅ | Hapus kampanye jika diperlukan |
+| **Posting Updates** | ✅ | Bagikan perkembangan kampanye ke donatur |
+| **Kelola Donasi** | ✅ | Verifikasi & update status donasi (pending → successful) |
+| **Kelola Alokasi** | ✅ | Record & dokumentasi penggunaan dana |
+| **Upload Proof** | ✅ | Lampirkan bukti penggunaan dana (foto) |
+| **Lihat Laporan** | ✅ | View detailed reports & activity logs |
+| **Audit Trail** | ✅ | Track semua perubahan & aktivitas sistem |
+
+---
+
+## 🏗️ Arsitektur & Struktur Database
+
+### Models (7)
+```
+User              → Donor & Admin (roles: 'donor' atau 'admin')
+Campaign          → Kampanye galangan dana
+Donation          → Transaksi donasi
+Allocation        → Penggunaan dana (transparansi)
+Category          → Kategori kampanye
+PaymentMethod     → Metode pembayaran (Transfer, QR)
+ActivityLog       → Audit trail semua aktivitas
+```
+
+### Key Relationships
+- `User` → hasMany `Donation`, `Campaign`, `ActivityLog`
+- `Campaign` → hasMany `Donation`, `Allocation`, `CampaignUpdate`, `CampaignComment`
+- `Donation` → belongsTo `User`, `Campaign`, `PaymentMethod`
+- `Allocation` → belongsTo `Campaign`, `User` (admin)
+
+### Controllers (5)
+- **AdminController** - Dashboard, kampanye CRUD, donasi manage
+- **CampaignController** - Browse, detail, search, filter, save
+- **DonationController** - Create, store, history, verify
+- **AllocationController** - Public transparency, admin allocation management
+- **HomeController** - Landing page & authenticated dashboard
+
+### Routes Structure
+```
+/ (root)                 → Landing page (campaigns index)
+/campaigns              → Browse semua kampanye
+/campaigns/{id}         → Detail kampanye + donation options
+/transparansi           → Public allocation log (transparansi)
+
+/donations              → Donasi saya (authenticated)
+/donations/create/{id}  → Form donasi
+/donations/history      → Riwayat donasi
+
+/admin/*                → Admin dashboard & management (admin only)
+/profile/*              → User profile management (authenticated)
+```
+
+---
+
+## 🎨 Frontend Components
+
+### Views Structure
+```
+resources/views/
+├── layouts/
+│   ├── app.blade.php          (authenticated layout)
+│   ├── guest.blade.php        (public layout)
+│   ├── admin.blade.php        (admin dashboard)
+│   ├── navigation.blade.php   (navbar)
+│   └── footer.blade.php
+├── campaigns/
+│   ├── index.blade.php        (browse campaigns)
+│   └── show.blade.php         (campaign detail)
+├── donations/
+│   ├── index.blade.php        (my donations)
+│   ├── create.blade.php       (donation form)
+│   ├── show.blade.php         (donation detail)
+│   └── success.blade.php      (confirmation)
+├── allocations/
+│   └── index.blade.php        (public transparency log)
+├── admin/
+│   ├── dashboard.blade.php
+│   ├── campaigns/
+│   │   ├── index.blade.php
+│   │   ├── create.blade.php
+│   │   ├── edit.blade.php
+│   │   └── show.blade.php
+│   ├── donations/
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   └── allocations/
+│       ├── index.blade.php
+│       ├── create.blade.php
+│       ├── select-campaign.blade.php
+│       └── show.blade.php
+├── home.blade.php             (dashboard)
+├── dashboard.blade.php        (auth dashboard)
+└── components/
+    └── (15+ reusable components)
+```
+
+### Styling & Framework
+- **TailwindCSS 3** - Utility-first styling
+- **Vite** - Fast asset bundling
+- **Alpine.js** - Interactive components
+- **Responsive Design** - Mobile-first approach
+
+---
+
+## 🗄️ Database Schema
+
+### Key Tables
+
+**users**
+```
+id, name, email, password, role (donor|admin), phone, address, 
+avatar, google_id, otp_code, email_verified_at, timestamps
+```
+
+**campaigns**
+```
+id, title, description, target_amount, collected_amount, status 
+(active|completed|draft), category_id, image, story, end_date, timestamps
+```
+
+**donations**
+```
+id, transaction_id (UUID), donor_id, campaign_id, amount, 
+payment_method_id, status (pending|successful|failed), proof_image, 
+message, donor_name, donor_email, anonymous, timestamps
+```
+
+**allocations**
+```
+id, campaign_id, admin_id, description, amount, allocation_date, 
+proof_image, timestamps
+```
+
+**activity_logs**
+```
+id, user_id, action, actionable_type, actionable_id, description, 
+old_values (JSON), new_values (JSON), timestamps
+```
+
+---
+
+## 🔒 Authentication & Authorization
+
+### Authentication Flow
+1. **Register/Login** → Email verification via OTP
+2. **OAuth Option** → Login via Google (Socialite)
+3. **Role-Based Access** → Middleware untuk donor vs admin
+
+### Middleware
+- `auth` - Must be authenticated
+- `verified` - Must verify email
+- `donor` - Access level: Donor
+- `admin` - Access level: Admin
+- `NoCache` - Prevent caching sensitive data
+
+### Policies
+- **CampaignPolicy** - Admin dapat manage campaigns
+- **DonationPolicy** - Donor/Admin dapat view donation mereka
+- **NotificationPolicy** - User hanya lihat notifikasi mereka
+
+---
+
+## 📈 Key Features Breakdown
+
+### 1️⃣ Transparansi Dana
+- **Public Allocation Log** - Siapa saja bisa lihat `/transparansi`
+- **Proof Images** - Setiap alokasi dilengkapi bukti foto
+- **Detailed Tracking** - Tahu persis kemana dana digunakan
+- **Historical Records** - All transactions logged & auditable
+
+### 2️⃣ Campaign Management
+- **Admin-Only Creation** - Only admins dapat buat kampanye
+- **Dynamic Status** - active → completed (auto-update bila target tercapai)
+- **Category Organization** - Organize by kategori (education, health, dll)
+- **Campaign Updates** - Admin post updates → donatur ternotifikasi
+- **Progress Tracking** - Visual progress bar & percentage
+
+### 3️⃣ Donation System
+- **Multiple Payment Methods** - Transfer Bank, QR Code
+- **Proof Verification** - Upload bukti pembayaran
+- **Real-time Status** - pending → successful → notification
+- **Anonymous Donation** - Option untuk donasi anonim
+- **Donor Analytics** - Track total donated, campaigns supported, impact score
+
+### 4️⃣ Activity Logging
+- **Full Audit Trail** - Setiap action (create, update, delete) tercatat
+- **Change Tracking** - Old vs new values disimpan
+- **Admin Accountability** - Who did what & when
+- **Searchable Logs** - Query activity history
+
+### 5️⃣ User Experience
+- **Responsive Design** - Desktop, tablet, mobile
+- **Fast Performance** - Vite + optimized queries
+- **Intuitive UI** - Clear CTAs, easy navigation
+- **Real-time Feedback** - Validation, success messages
+
+---
+
+## 📊 Statistics & Metrics (Dashboard)
+
+Admin dapat melihat:
+- Total donation amount (successful)
+- Active campaigns count
+- Pending donations waiting approval
+- Top 5 donors by total amount
+- Recent donations feed
+- All-time metrics
+
+---
+
+## 🚀 Deployment
+
+### Production Setup
+```bash
+# Build assets
+npm run build
+
+# Configure .env for production
+DB_CONNECTION=pgsql
+APP_ENV=production
+
+# Run migrations on server
+php artisan migrate --force
+
+# Cache config & routes
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+### Server Requirements
+- PHP 8.2+ with extensions: pdo_pgsql, gd, mbstring
+- PostgreSQL 12+
+- Nginx/Apache with rewrite rules
+- 512MB+ RAM
+
+---
+
+## 🛠️ Development Commands
+
+```bash
+# Database
+php artisan migrate                 # Run migrations
+php artisan migrate:fresh --seed    # Fresh + seed
+php artisan tinker                  # Interactive shell
+
+# Testing
+php artisan test                    # Run PHPUnit tests
+
+# Code Quality
+./vendor/bin/pint                   # Format code
+
+# Assets
+npm run dev                         # Watch mode
+npm run build                       # Production build
+
+# Cache
+php artisan cache:clear            # Clear all cache
+php artisan config:cache           # Cache config
+
+# Logs
+php artisan logs                    # View recent logs
+```
+
+---
+
+## 📚 Tech Stack
+
+| Layer | Technology | Version |
+|-------|-----------|---------|
+| **Backend** | Laravel | 12 |
+| **Database** | PostgreSQL | 12+ |
+| **Frontend** | Blade + TailwindCSS | - |
+| **Asset Pipeline** | Vite | 7+ |
+| **Authentication** | Laravel Breeze + Socialite | - |
+| **Validation** | Laravel Validation | - |
+| **Storage** | Local Storage + S3 Ready | - |
+
+---
+
+## 🔧 Configuration Files
+
+### Environment (.env)
+```
+APP_NAME=HopeFund
+APP_ENV=production
+DB_CONNECTION=pgsql
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=hopefund
+QUEUE_CONNECTION=database
+MAIL_MAILER=smtp
+```
+
+### Key Config
+- `config/app.php` - Application settings
+- `config/auth.php` - Authentication config
+- `config/database.php` - Database connections
+- `config/mail.php` - Email configuration
+- `config/filesystems.php` - Storage configuration
+
+---
+
+## 🐛 Troubleshooting
+
+### Database Connection Error
+```bash
+php artisan tinker
+DB::connection()->getPdo()  # Test connection
+```
+
+### Cache Issues
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+```
+
+### Permission Issues
+```bash
+chmod -R 775 storage bootstrap/cache
+chown -R www-data:www-data storage
+```
+
+---
+
+## 📞 Support & Documentation
+
+- **Laravel Docs**: https://laravel.com/docs/12
+- **TailwindCSS**: https://tailwindcss.com/docs
+- **PostgreSQL**: https://postgresql.org/docs
+- **Vite Docs**: https://vitejs.dev/guide/
+
+---
+
+## 📋 Project Information
+
+| Aspek | Detail |
+|-------|--------|
+| **Project Name** | HopeFund |
+| **Purpose** | Platform Galangan Dana Transparan |
+| **Framework** | Laravel 12 |
+| **Database** | PostgreSQL |
+| **Created** | November 2025 |
+| **Last Updated** | December 2025 |
+| **Status** | Production Ready |
+| **License** | MIT |
+
+---
+
+## 🎓 Architecture Highlights
+
+### Clean Code Principles
+- ✅ Models dengan proper relationships
+- ✅ Controllers with single responsibility
+- ✅ Route organization dengan groups & middleware
+- ✅ View components reusable
+- ✅ Activity logging untuk audit trail
+
+### Security Features
+- ✅ CSRF Protection
+- ✅ SQL Injection Prevention (Eloquent ORM)
+- ✅ Password Hashing (bcrypt)
+- ✅ Email Verification
+- ✅ Role-based Access Control
+- ✅ Policy-based Authorization
+
+### Performance Optimizations
+- ✅ Query optimization (eager loading)
+- ✅ Database indexing
+- ✅ Caching strategy
+- ✅ Asset minification (Vite)
+- ✅ Lazy loading images
+
+---
+
+## 🚀 Future Enhancements (Optional)
+
+- [ ] Payment gateway integration (Midtrans, Stripe)
+- [ ] Email notifications
+- [ ] Advanced reporting & export
+- [ ] Social sharing features
+- [ ] Milestone achievements
+- [ ] Donor badges & recognition
+- [ ] API for mobile app
+- [ ] Real-time notifications (WebSocket)
+
+---
+
+**HopeFund** - Transparansi & Kepercayaan dalam Setiap Donasi 🤝
+
+Siap digunakan untuk operasional penuh! 🎉
+
 
 ## Security Vulnerabilities
 
